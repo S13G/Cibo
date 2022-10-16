@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    'django.contrib.sites',
+    'django.contrib.sitemaps',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
     'taggit',
@@ -114,6 +116,9 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# SITEMAPS 
+SITE_ID = 1
 
 
 # Static files (CSS, JavaScript, Images)
