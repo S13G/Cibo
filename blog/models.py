@@ -1,4 +1,4 @@
-from operator import imod
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from django.utils import timezone
@@ -11,13 +11,13 @@ from taggit.managers import TaggableManager
 
 class PublishedManager(models.Manager):
     def get_queryset(self):
-        return super(PublishedManager, self).get_queryset().filter(status='published')
+        return super(PublishedManager, self).get_queryset().filter(status='PUBLISHED')
 
 
 class Post(models.Model):
     STATUS_CHOICES = (
-        ('draft', 'Draft'),
-        ('published', 'Published'),
+        ('DRAFT', 'DRAFT'),
+        ('PUBLISHED', 'PUBLISHED'),
     )
     tags = TaggableManager()
     title = models.CharField(max_length=255)
@@ -54,8 +54,7 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('created',)
-    
+        indexes = [models.Index(fields=['created'])]
 
     def __str__(self):
-        return f"Coomment by {self.name} on {self.post}"
-    
+        return f"Comment by {self.name} on {self.post}"
